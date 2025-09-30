@@ -33,4 +33,17 @@ public class EmployeService {
             System.out.println("Service Error: " +e.getMessage());
         }
     }
+
+    public void getEmployeById(Integer id){
+        try{
+            if (id == null || id <= 0){
+                System.out.println("Enter a valid id number");
+                return;
+            }
+
+            employeRepository.getEmployeById(id);
+        }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
 }

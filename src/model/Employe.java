@@ -22,7 +22,7 @@ public class Employe extends Person{
         this.secteur = secteur;
     }
 
-    public Employe(String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double salary, double seniority, String post, TypeContrat typeContrat, Secteur secteur){}
+//    public Employe(String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double salary, double seniority, String post, TypeContrat typeContrat, Secteur secteur){}
 
     public double getSalary() {
         return salary;

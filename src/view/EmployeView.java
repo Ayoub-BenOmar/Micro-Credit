@@ -34,21 +34,33 @@ public class EmployeView {
         employeService.createEmploye(emp);
     }
 
-    public void updateEmploye(){
-        Employe emp = new Employe(
-                "Casablanca",
-                2,
-                true,
-                5000.0,
-                SituationFamiliale.MARRIED,
-                85.0,
-                12000.0,
-                5,
-                "Manager",
-                TypeContrat.CDI,
-                Secteur.GRANDE_ENTREPRISE
-        );
+//    public void updateEmploye(){
+//        Employe emp = new Employe(
+//                "Casablanca",
+//                2,
+//                true,
+//                5000.0,
+//                SituationFamiliale.MARRIED,
+//                85.0,
+//                12000.0,
+//                5,
+//                "Manager",
+//                TypeContrat.CDI,
+//                Secteur.GRANDE_ENTREPRISE
+//        );
+//
+//        employeService.createEmploye(emp);
+//    }
 
-        employeService.createEmploye(emp);
+    public void getEmployeById(){
+        System.out.println("Enter the id of the employe: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            employeService.getEmployeById(id);
+        }catch (InputMismatchException e){
+            System.out.println("View Error: " + e.getMessage());
+        }
     }
 }

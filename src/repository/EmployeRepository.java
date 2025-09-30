@@ -58,4 +58,25 @@ public class EmployeRepository {
         return false;
     }
 
+    public int getEmployeById(Integer id){
+        String query = "SELECT nom, prenom FROM personne  WHERE id = ? AND role=1";
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if (resultSet.next()){
+                    String nom = resultSet.getString("nom");
+                    String prenom = resultSet.getString("prenom");
+                    System.out.println("Employe found: " + nom + " " + prenom);
+                    return 1;
+                }else{
+                    System.out.println("No employe found with this id");
+                    return 0;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
+    }
+
 }
