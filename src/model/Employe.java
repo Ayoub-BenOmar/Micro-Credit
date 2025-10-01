@@ -4,9 +4,11 @@ import enums.Secteur;
 import enums.SituationFamiliale;
 import enums.TypeContrat;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Employe extends Person{
+    private Integer id;
     private double salary;
     private double seniority;
     private String post;
@@ -15,6 +17,7 @@ public class Employe extends Person{
 
     public Employe(String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double salary, double seniority, String post, TypeContrat typeContrat, Secteur secteur) {
         super(1, name, lastName, birthDate, city, kidsNumber, investissement, placement, familySituation, score);
+        this.id = id;
         this.salary = salary;
         this.seniority = seniority;
         this.post = post;
@@ -22,7 +25,23 @@ public class Employe extends Person{
         this.secteur = secteur;
     }
 
-//    public Employe(String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double salary, double seniority, String post, TypeContrat typeContrat, Secteur secteur){}
+    public Employe(Integer id, String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double salary, double seniority, String post, TypeContrat typeContrat, Secteur secteur) {
+        super(1, name, lastName, birthDate, city, kidsNumber, investissement, placement, familySituation, score);
+        this.id = id;
+        this.salary = salary;
+        this.seniority = seniority;
+        this.post = post;
+        this.typeContrat = typeContrat;
+        this.secteur = secteur;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public double getSalary() {
         return salary;

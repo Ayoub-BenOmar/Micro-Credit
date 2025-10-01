@@ -30,12 +30,8 @@ public abstract class Person {
         this.score = score;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Person() {
 
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getRole() {

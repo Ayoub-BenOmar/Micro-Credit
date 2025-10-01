@@ -5,6 +5,8 @@ import model.Employe;
 import repository.EmployeRepository;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeService {
     EmployeRepository employeRepository = new EmployeRepository();
@@ -56,6 +58,31 @@ public class EmployeService {
             employeRepository.delete(id);
             System.out.println("The employe deleted");
         }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
+
+    public void getAllEmployes(){
+        try {
+            List<Employe> employes = employeRepository.getAllEmployes();
+            employes.forEach(employe -> System.out.println(
+                    employe.getId() + ", " +
+                            employe.getName() + ", " +
+                            employe.getLastName() + ", " +
+                            employe.getBirthDate() + ", " +
+                            employe.getCity() + ", " +
+                            employe.getKidsNumber() + ", " +
+                            employe.isInvestissement() + ", " +
+                            employe.getPlacement() + ", " +
+                            employe.getFamilySituation() + ", " +
+                            employe.getScore() + ", " +
+                            employe.getSalary() + ", " +
+                            employe.getSeniority() + ", " +
+                            employe.getPost() + ", " +
+                            employe.getTypeContrat() + ", " +
+                            employe.getSecteur()
+            ));
+        } catch (Exception e) {
             System.out.println("Service Error: " + e.getMessage());
         }
     }

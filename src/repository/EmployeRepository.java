@@ -1,9 +1,14 @@
 package repository;
 
+import enums.Secteur;
+import enums.SituationFamiliale;
+import enums.TypeContrat;
 import util.DBConnection;
 import model.Employe;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeRepository {
     Connection connection = DBConnection.getConnection();
@@ -91,5 +96,36 @@ public class EmployeRepository {
             System.out.println("Repository Error: " + e.getMessage());
         }
         return 0;
+    }
+
+    public List<Employe> getAllEmployes(){
+        String query = "SELECT id, nom, prenom, date_naissance, ville, nombre_enfants, investissement, placement, situation_familiale, score, salaire, anciennete, poste, type_contrat, secteur_entreprise FROM personne WHERE role = 1";
+        List<Employe> employes = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery()){
+            while(resultSet.next()){
+                Employe employe = new Employe(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getDate("date_naissance").toLocalDate(),
+                        resultSet.getString("ville"),
+                        resultSet.getInt("nombre_enfants"),
+                        resultSet.getBoolean("investissement"),
+                        resultSet.getDouble("placement"),
+                        SituationFamiliale.valueOf(resultSet.getString("situation_familiale")),
+                        resultSet.getDouble("score"),
+                        resultSet.getDouble("salaire"),
+                        resultSet.getInt("anciennete"),
+                        resultSet.getString("poste"),
+                        TypeContrat.valueOf(resultSet.getString("type_contrat")),
+                        Secteur.valueOf(resultSet.getString("secteur_entreprise"))
+                );
+                employes.add(employe);
+            }
+        }catch (SQLException e){
+            System.out.println("Repository Error: " + e.getMessage());
+        }
+        return employes;
     }
 }

@@ -75,4 +75,12 @@ public class EmployeView {
             System.out.println("View Error: " + e.getMessage());
         }
     }
+
+    public void getAllEmployes(){
+        try{
+            employeService.getAllEmployes();
+        }catch (InputMismatchException e){
+            System.out.println("View Error: " + e.getMessage());
+        }
+    }
 }
