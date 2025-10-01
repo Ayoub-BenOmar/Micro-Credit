@@ -32,4 +32,21 @@ public class ProfessionnelService {
             System.out.println("Service Error: " + e.getMessage());
         }
     }
+
+    public void delete(Integer id){
+        try{
+            if(id ==  null || id <= 0){
+                System.out.println("Enter a valid id number");
+                return;
+            }
+            if (professionnelRepository.delete(id) == 1){
+                System.out.println("The professionnel deleted");
+            }else {
+                System.out.println("No professionnel found with this id");
+                return;
+            }
+        }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
 }

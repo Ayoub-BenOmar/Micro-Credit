@@ -7,6 +7,6 @@ public class Main {
         DBConnection connection = new DBConnection();
         EmployeView employeView = new EmployeView();
         ProfessionnelView professionnelView = new ProfessionnelView();
-        professionnelView.getProfById();
+        professionnelView.delete();
     }
 }

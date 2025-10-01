@@ -39,12 +39,24 @@ public class ProfessionnelView {
     }
 
     public void getProfById(){
-        System.out.println("Enter the id of the employe: ");
+        System.out.println("Enter the id of the professionnel: ");
         int id = scanner.nextInt();
         scanner.nextLine();
 
         try{
             professionnelService.getProfById(id);
+        }catch (InputMismatchException e){
+            System.out.println("View Error: " + e.getMessage());
+        }
+    }
+
+    public void delete(){
+        System.out.println("Enter the id of the professionnel: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            professionnelService.delete(id);
         }catch (InputMismatchException e){
             System.out.println("View Error: " + e.getMessage());
         }

@@ -55,8 +55,12 @@ public class EmployeService {
                 System.out.println("Enter a valid id number");
                 return;
             }
-            employeRepository.delete(id);
-            System.out.println("The employe deleted");
+            if (employeRepository.delete(id) == 1){
+                System.out.println("The employé deleted");
+            }else {
+                System.out.println("No employé found with this id");
+                return;
+            }
         }catch (Exception e){
             System.out.println("Service Error: " + e.getMessage());
         }

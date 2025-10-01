@@ -53,4 +53,18 @@ public class ProfessionnelRepository {
             return 0;
         }
     }
+
+    public int delete(Integer id){
+        String query = "DELETE FROM personne WHERE id=? AND role=2";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+            if(rows> 0){
+                return 1;
+            }
+        }catch (SQLException e){
+            System.out.println("Repository Error: " + e.getMessage());
+        }
+        return 0;
+    }
 }

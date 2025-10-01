@@ -85,7 +85,7 @@ public class EmployeRepository {
     }
 
     public int delete(Integer id){
-        String query = "DELETE FROM personne WHERE id=?";
+        String query = "DELETE FROM personne WHERE id=? AND role=1";
         try(PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
             int rows = statement.executeUpdate();
