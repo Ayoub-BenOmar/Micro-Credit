@@ -21,18 +21,18 @@ public class EmployeService {
         }
     }
 
-    public void updateEmploye(Employe employe){
-        try{
-            boolean updated = employeRepository.update(employe);
-            if (updated){
-                System.out.println("Employee updated successfully");
-            }else{
-                System.out.println("No employé foud with this id");
-            }
-        }catch (Exception e){
-            System.out.println("Service Error: " +e.getMessage());
-        }
-    }
+//    public void updateEmploye(Employe employe){
+//        try{
+//            boolean updated = employeRepository.update(employe);
+//            if (updated){
+//                System.out.println("Employee updated successfully");
+//            }else{
+//                System.out.println("No employé foud with this id");
+//            }
+//        }catch (Exception e){
+//            System.out.println("Service Error: " +e.getMessage());
+//        }
+//    }
 
     public void getEmployeById(Integer id){
         try{
@@ -42,6 +42,19 @@ public class EmployeService {
             }
 
             employeRepository.getEmployeById(id);
+        }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
+
+    public void deleteEmploye(Integer id){
+        try{
+            if(id ==  null || id <= 0){
+                System.out.println("Enter a valid id number");
+                return;
+            }
+            employeRepository.delete(id);
+            System.out.println("The employe deleted");
         }catch (Exception e){
             System.out.println("Service Error: " + e.getMessage());
         }

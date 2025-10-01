@@ -34,29 +34,29 @@ public class EmployeRepository {
         }
     }
 
-    public boolean update(Employe employe){
-        String query = "UPDATE personne SET ville = ?, nombre_enfants = ?, investissment = ?, placement = ?, situation_familiale = ?, salaire = ?, anciennete = ?, poste = ?, type_contrat = ?, secteur_entreprise = ? WHERE id = ?";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, employe.getCity());
-            statement.setInt(2, employe.getKidsNumber());
-            statement.setBoolean(3, employe.isInvestissement());
-            statement.setDouble(4, employe.getPlacement());
-            statement.setString(5, employe.getFamilySituation().name());
-            statement.setDouble(6, employe.getSalary());
-            statement.setDouble(7, employe.getSeniority());
-            statement.setString(8, employe.getPost());
-            statement.setString(9, employe.getTypeContrat().name());
-            statement.setString(10, employe.getSecteur().name());
-            statement.setInt(11, employe.getId());
-
-            int rows = statement.executeUpdate();
-            return rows > 0;
-        }catch (SQLException e){
-            System.out.println("Repository Error: " + e.getMessage());
-        }
-        return false;
-    }
+//    public boolean update(Employe employe){
+//        String query = "UPDATE personne SET ville = ?, nombre_enfants = ?, investissment = ?, placement = ?, situation_familiale = ?, salaire = ?, anciennete = ?, poste = ?, type_contrat = ?, secteur_entreprise = ? WHERE id = ?";
+//
+//        try (PreparedStatement statement = connection.prepareStatement(query)) {
+//            statement.setString(1, employe.getCity());
+//            statement.setInt(2, employe.getKidsNumber());
+//            statement.setBoolean(3, employe.isInvestissement());
+//            statement.setDouble(4, employe.getPlacement());
+//            statement.setString(5, employe.getFamilySituation().name());
+//            statement.setDouble(6, employe.getSalary());
+//            statement.setDouble(7, employe.getSeniority());
+//            statement.setString(8, employe.getPost());
+//            statement.setString(9, employe.getTypeContrat().name());
+//            statement.setString(10, employe.getSecteur().name());
+//            statement.setInt(11, employe.getId());
+//
+//            int rows = statement.executeUpdate();
+//            return rows > 0;
+//        }catch (SQLException e){
+//            System.out.println("Repository Error: " + e.getMessage());
+//        }
+//        return false;
+//    }
 
     public int getEmployeById(Integer id){
         String query = "SELECT nom, prenom FROM personne  WHERE id = ? AND role=1";
@@ -79,4 +79,17 @@ public class EmployeRepository {
         }
     }
 
+    public int delete(Integer id){
+        String query = "DELETE FROM personne WHERE id=?";
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+            if(rows> 0){
+                return 1;
+            }
+        }catch (SQLException e){
+            System.out.println("Repository Error: " + e.getMessage());
+        }
+        return 0;
+    }
 }
