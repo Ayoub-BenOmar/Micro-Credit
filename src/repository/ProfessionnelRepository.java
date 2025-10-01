@@ -33,4 +33,24 @@ public class ProfessionnelRepository {
         }
     }
 
+    public int getProfById(Integer id){
+        String query = "SELECT nom, prenom FROM personne  WHERE id = ? AND role=2";
+        try (PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if (resultSet.next()){
+                    String nom = resultSet.getString("nom");
+                    String prenom = resultSet.getString("prenom");
+                    System.out.println("Professionnel found: " + nom + " " + prenom);
+                    return 1;
+                }else{
+                    System.out.println("No Professionnel found with this id");
+                    return 0;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        }
+    }
 }

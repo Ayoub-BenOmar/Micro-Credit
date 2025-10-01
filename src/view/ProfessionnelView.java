@@ -5,11 +5,14 @@ import enums.SituationFamiliale;
 import enums.TypeContrat;
 import model.Professionnel;
 import service.ProfessionnelService;
+import java.util.*;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 
 public class ProfessionnelView {
     ProfessionnelService professionnelService = new ProfessionnelService();
+    Scanner scanner = new Scanner(System.in);
 
     public void create(){
         try{
@@ -31,6 +34,18 @@ public class ProfessionnelView {
             );
             professionnelService.create(professionnel);
         }catch (Exception e){
+            System.out.println("View Error: " + e.getMessage());
+        }
+    }
+
+    public void getProfById(){
+        System.out.println("Enter the id of the employe: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            professionnelService.getProfById(id);
+        }catch (InputMismatchException e){
             System.out.println("View Error: " + e.getMessage());
         }
     }

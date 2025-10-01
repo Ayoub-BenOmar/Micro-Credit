@@ -19,4 +19,17 @@ public class ProfessionnelService {
             System.out.println("Servivce Error: " + e.getMessage());
         }
     }
+
+    public void getProfById(Integer id){
+        try{
+            if (id == null || id <= 0){
+                System.out.println("Enter a valid id number");
+                return;
+            }
+
+            professionnelRepository.getProfById(id);
+        }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
 }
