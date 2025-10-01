@@ -3,8 +3,6 @@ package model;
 import enums.Secteur;
 import enums.SituationFamiliale;
 import enums.TypeContrat;
-
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Employe extends Person{

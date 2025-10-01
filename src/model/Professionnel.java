@@ -11,7 +11,7 @@ public class Professionnel extends Person{
     private String activityField;
     private String activity;
 
-    public Professionnel(String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, LocalDate createdAt, double score, double revenue, String fiscaleImmatriculation, boolean autoEntrepreneur, String activityField, String activity) {
+    public Professionnel(String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double revenue, String fiscaleImmatriculation, boolean autoEntrepreneur, String activityField, String activity) {
         super(2, name, lastName, birthDate, city, kidsNumber, investissement, placement, familySituation, score);
         this.revenue = revenue;
         this.fiscaleImmatriculation = fiscaleImmatriculation;
