@@ -1,9 +1,14 @@
 package repository;
 
+import enums.Secteur;
+import enums.SituationFamiliale;
+import enums.TypeContrat;
 import model.Employe;
 import model.Professionnel;
 import util.DBConnection;
 import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 public class ProfessionnelRepository {
     Connection connection = DBConnection.getConnection();
@@ -66,5 +71,36 @@ public class ProfessionnelRepository {
             System.out.println("Repository Error: " + e.getMessage());
         }
         return 0;
+    }
+
+    public List<Professionnel> getAllProfs(){
+        String query = "SELECT id, nom, prenom, date_naissance, ville, nombre_enfants, investissement, placement, situation_familiale, score, revenu, immatriculation_fiscale, auto_professionnel, secteur_activite, activite FROM personne WHERE role = 2";
+        List<Professionnel> professionnels = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()){
+            while(resultSet.next()){
+                Professionnel professionnel = new Professionnel(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getDate("date_naissance").toLocalDate(),
+                        resultSet.getString("ville"),
+                        resultSet.getInt("nombre_enfants"),
+                        resultSet.getBoolean("investissement"),
+                        resultSet.getDouble("placement"),
+                        SituationFamiliale.valueOf(resultSet.getString("situation_familiale")),
+                        resultSet.getDouble("score"),
+                        resultSet.getDouble("revenu"),
+                        resultSet.getString("immatriculation_fiscale"),
+                        resultSet.getBoolean("auto_professionnel"),
+                        resultSet.getString("secteur_activite"),
+                        resultSet.getString("activite")
+                );
+                professionnels.add(professionnel);
+            }
+        }catch (SQLException e){
+            System.out.println("Repository Error: " + e.getMessage());
+        }
+        return professionnels;
     }
 }

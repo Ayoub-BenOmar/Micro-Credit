@@ -71,17 +71,13 @@ public class EmployeRepository {
                 if (resultSet.next()){
                     String nom = resultSet.getString("nom");
                     String prenom = resultSet.getString("prenom");
-                    System.out.println("Employe found: " + nom + " " + prenom);
+                    System.out.println("Employé found: " + nom + " " + prenom);
                     return 1;
-                }else{
-                    System.out.println("No employe found with this id");
-                    return 0;
                 }
             }
         }catch(SQLException e){
             System.out.println("Error: " + e.getMessage());
-            return 0;
-        }
+        }return 0;
     }
 
     public int delete(Integer id){

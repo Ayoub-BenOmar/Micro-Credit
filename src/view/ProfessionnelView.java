@@ -61,4 +61,12 @@ public class ProfessionnelView {
             System.out.println("View Error: " + e.getMessage());
         }
     }
+
+    public void getAllProfs(){
+        try{
+            professionnelService.getAllProfs();
+        }catch (Exception e){
+            System.out.println("View Error: " + e.getMessage());
+        }
+    }
 }

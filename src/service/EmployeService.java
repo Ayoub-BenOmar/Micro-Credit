@@ -43,7 +43,11 @@ public class EmployeService {
                 return;
             }
 
-            employeRepository.getEmployeById(id);
+            if (employeRepository.getEmployeById(id) != 1){
+                System.out.println("No employé found with this id");
+            }else {
+                employeRepository.getEmployeById(id);
+            }
         }catch (Exception e){
             System.out.println("Service Error: " + e.getMessage());
         }

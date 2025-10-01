@@ -5,6 +5,7 @@ import enums.SituationFamiliale;
 import java.time.LocalDate;
 
 public class Professionnel extends Person{
+    private Integer id;
     private double revenue;
     private String fiscaleImmatriculation;
     private boolean autoEntrepreneur;
@@ -18,6 +19,24 @@ public class Professionnel extends Person{
         this.autoEntrepreneur = autoEntrepreneur;
         this.activityField = activityField;
         this.activity = activity;
+    }
+
+    public Professionnel(Integer id, String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score, double revenue, String fiscaleImmatriculation, boolean autoEntrepreneur, String activityField, String activity) {
+        super(2, name, lastName, birthDate, city, kidsNumber, investissement, placement, familySituation, score);
+        this.id = id;
+        this.revenue = revenue;
+        this.fiscaleImmatriculation = fiscaleImmatriculation;
+        this.autoEntrepreneur = autoEntrepreneur;
+        this.activityField = activityField;
+        this.activity = activity;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public double getRevenue() {

@@ -1,8 +1,11 @@
 package service;
 
+import model.Employe;
 import model.Professionnel;
 import repository.ProfessionnelRepository;
 import util.ProfessionnelValidation;
+
+import java.util.List;
 
 public class ProfessionnelService {
     ProfessionnelRepository professionnelRepository = new ProfessionnelRepository();
@@ -46,6 +49,31 @@ public class ProfessionnelService {
                 return;
             }
         }catch (Exception e){
+            System.out.println("Service Error: " + e.getMessage());
+        }
+    }
+
+    public void getAllProfs(){
+        try {
+            List<Professionnel> professionnels = professionnelRepository.getAllProfs();
+            professionnels.forEach(employe -> System.out.println(
+                    employe.getId() + ", " +
+                            employe.getName() + ", " +
+                            employe.getLastName() + ", " +
+                            employe.getBirthDate() + ", " +
+                            employe.getCity() + ", " +
+                            employe.getKidsNumber() + ", " +
+                            employe.isInvestissement() + ", " +
+                            employe.getPlacement() + ", " +
+                            employe.getFamilySituation() + ", " +
+                            employe.getScore() + ", " +
+                            employe.getRevenue() + ", " +
+                            employe.getFiscaleImmatriculation() + ", " +
+                            employe.isAutoEntrepreneur() + ", " +
+                            employe.getActivityField() + ", " +
+                            employe.getActivity()
+            ));
+        } catch (Exception e) {
             System.out.println("Service Error: " + e.getMessage());
         }
     }

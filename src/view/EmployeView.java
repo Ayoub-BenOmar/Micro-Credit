@@ -79,7 +79,7 @@ public class EmployeView {
     public void getAllEmployes(){
         try{
             employeService.getAllEmployes();
-        }catch (InputMismatchException e){
+        }catch (Exception e){
             System.out.println("View Error: " + e.getMessage());
         }
     }
