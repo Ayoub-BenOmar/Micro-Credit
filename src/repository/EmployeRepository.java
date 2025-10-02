@@ -5,6 +5,7 @@ import enums.SituationFamiliale;
 import enums.TypeContrat;
 import util.DBConnection;
 import model.Employe;
+import util.ScoreCalculation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class EmployeRepository {
     Connection connection = DBConnection.getConnection();
 
     public void create(Employe employe){
+        ScoreCalculation scoreCalculation = new ScoreCalculation();
         String query = "INSERT INTO personne (role, nom, prenom, date_naissance, ville, nombre_enfants, investissement, placement, situation_familiale, score, salaire, anciennete, poste, type_contrat, secteur_entreprise) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, employe.getRole());

@@ -5,6 +5,7 @@ import enums.SituationFamiliale;
 import enums.TypeContrat;
 import model.Employe;
 import service.EmployeService;
+import util.ScoreCalculation;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.*;
 public class EmployeView {
     EmployeService employeService = new EmployeService();
     Scanner scanner = new Scanner(System.in);
+    ScoreCalculation scoreCalculation = new ScoreCalculation();
 
     public void createEmploye() {
         Employe emp = new Employe(
@@ -23,14 +25,14 @@ public class EmployeView {
                 true,
                 3000.0,
                 SituationFamiliale.SINGLE,
-                88.0,
+                0,
                 22000.0,
                 9,
                 "Manager",
                 TypeContrat.CDI,
                 Secteur.GRANDE_ENTREPRISE
         );
-
+        scoreCalculation.employeTotalScore(emp);
         employeService.createEmploye(emp);
     }
 
