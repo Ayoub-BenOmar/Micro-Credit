@@ -38,16 +38,13 @@ public class EmployeService {
 
     public void getEmployeById(Integer id){
         try{
-            if (id == null || id <= 0){
-                System.out.println("Enter a valid id number");
+            Employe employe = employeRepository.getEmployeById(id);
+            if (employe == null) {
+                System.out.println("Employé not found");
                 return;
             }
+            System.out.println("Employé found: " + employe.getName() + " " + employe.getLastName());
 
-            if (employeRepository.getEmployeById(id) != 1){
-                System.out.println("No employé found with this id");
-            }else {
-                employeRepository.getEmployeById(id);
-            }
         }catch (Exception e){
             System.out.println("Service Error: " + e.getMessage());
         }

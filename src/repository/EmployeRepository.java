@@ -65,22 +65,31 @@ public class EmployeRepository {
 //        return false;
 //    }
 
-    public int getEmployeById(Integer id){
-        String query = "SELECT nom, prenom FROM personne  WHERE id = ? AND role=1";
-        try (PreparedStatement statement = connection.prepareStatement(query)){
+    public Employe getEmployeById(int id) {
+        String query = "SELECT id, nom, prenom, date_naissance, ville, score, salaire, nouveau " +
+                "FROM personne WHERE id = ? AND role = 1";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
-            try(ResultSet resultSet = statement.executeQuery()){
-                if (resultSet.next()){
-                    String nom = resultSet.getString("nom");
-                    String prenom = resultSet.getString("prenom");
-                    System.out.println("Employé found: " + nom + " " + prenom);
-                    return 1;
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    Employe employe = new Employe();
+                    employe.setId(rs.getInt("id"));
+                    employe.setName(rs.getString("nom"));
+                    employe.setLastName(rs.getString("prenom"));
+                    employe.setBirthDate(rs.getDate("date_naissance").toLocalDate());
+                    employe.setCity(rs.getString("ville"));
+                    employe.setScore(rs.getDouble("score"));
+                    employe.setSalary(rs.getDouble("salaire"));
+                    employe.setNewClient(rs.getBoolean("nouveau"));
+                    return employe;
                 }
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-        }return 0;
+        }
+        return null;
     }
+
 
     public int delete(Integer id){
         String query = "DELETE FROM personne WHERE id=? AND role=1";

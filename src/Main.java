@@ -1,4 +1,5 @@
 import util.DBConnection;
+import view.CreditView;
 import view.EmployeView;
 import view.ProfessionnelView;
 
@@ -7,6 +8,7 @@ public class Main {
         DBConnection connection = new DBConnection();
         EmployeView employeView = new EmployeView();
         ProfessionnelView professionnelView = new ProfessionnelView();
-        employeView.createEmploye();
+        CreditView creditView = new CreditView();
+        creditView.createCreditView();
     }
 }

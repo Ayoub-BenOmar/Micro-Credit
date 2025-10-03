@@ -2,10 +2,11 @@ package model;
 
 import enums.CreditType;
 import enums.DecisionCredit;
-
 import java.time.*;
 
 public class Credit {
+    private int id;
+    private int personneId;
     private LocalDate dateCredit;
     private double amountRequested;
     private double amountAllowed;
@@ -22,6 +23,25 @@ public class Credit {
         this.monthDuration = monthDuration;
         this.creditType = creditType;
         this.decisionCredit = decisionCredit;
+    }
+
+    public Credit(int personneId, LocalDate dateCredit, double amountRequested, int monthDuration, double rate, CreditType creditType) {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPersonneId() {
+        return personneId;
+    }
+
+    public void setPersonneId(int personneId) {
+        this.personneId = personneId;
     }
 
     public LocalDate getDateCredit() {

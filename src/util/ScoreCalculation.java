@@ -90,8 +90,8 @@ public class ScoreCalculation {
     }
 
 
-    public void employeTotalScore(Employe employe){
-        employe.setScore(employeAge(employe) + employeStabilityProf(employe) + employePatrimoine(employe) + employeFamilySituation(employe) + employeKids(employe));
+    public int employeTotalScore(Employe employe){
+        return employe.setScore(employeAge(employe) + employeStabilityProf(employe) + employePatrimoine(employe) + employeFamilySituation(employe) + employeKids(employe));
     }
 
 }

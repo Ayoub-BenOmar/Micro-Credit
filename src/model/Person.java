@@ -16,6 +16,7 @@ public abstract class Person {
     private double placement;
     private SituationFamiliale familySituation;
     private double score;
+    private boolean newClient;
 
     public Person(Integer role, String name, String lastName, LocalDate birthDate, String city, int kidsNumber, boolean investissement, double placement, SituationFamiliale familySituation, double score) {
         this.role = role;
@@ -28,6 +29,14 @@ public abstract class Person {
         this.placement = placement;
         this.familySituation = familySituation;
         this.score = score;
+    }
+
+    public boolean isNewClient() {
+        return newClient;
+    }
+
+    public void setNewClient(boolean newClient) {
+        this.newClient = newClient;
     }
 
     public Person() {
@@ -110,7 +119,8 @@ public abstract class Person {
         return score;
     }
 
-    public void setScore(double score) {
+    public int setScore(double score) {
         this.score = score;
+        return 0;
     }
 }

@@ -33,6 +33,10 @@ public class Employe extends Person{
         this.secteur = secteur;
     }
 
+    public Employe() {
+
+    }
+
     public Integer getId() {
         return id;
     }
