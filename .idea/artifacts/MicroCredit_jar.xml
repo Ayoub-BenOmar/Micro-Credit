@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MicroCredit:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MicroCredit_jar</output-path>
+    <root id="archive" name="Micro-Credit.jar">
+      <element id="module-output" name="Micro-Credit" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/postgresql-42.7.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
