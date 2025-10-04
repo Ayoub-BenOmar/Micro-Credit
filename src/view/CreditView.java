@@ -55,8 +55,6 @@ public class CreditView {
 
             creditService.createEmployeCredit(employeId, credit);
 
-            System.out.println("Crédit inséré avec succès !");
-
         } catch (IllegalArgumentException e) {
             System.err.println("Erreur de validation : " + e.getMessage());
         } catch (IllegalStateException e) {

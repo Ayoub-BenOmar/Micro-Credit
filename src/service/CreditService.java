@@ -29,21 +29,25 @@ public class CreditService {
     public void createEmployeCredit(Integer employeId, Credit credit) {
         try {
             Employe employe = employeRepository.getEmployeById(employeId);
+            double maxLoan = 0;
 
             if (employe == null) {
                 throw new IllegalArgumentException("No employee found with id " + employeId);
             }
 
-            if (employe.isNewClient()) {
-                if (employe.getScore() >= 60 && employe.getScore() <= 79) {
-                    credit.setAmountAllowed(employe.getSalary() * 4);
-                }
-            } else {
-                if (employe.getScore() >= 60 && employe.getScore() <= 79) {
-                    credit.setAmountAllowed(employe.getSalary() * 7);
-                } else if (employe.getScore() >= 80) {
-                    credit.setAmountAllowed(employe.getSalary() * 10);
-                }
+            if (employe.isNewClient() && employe.getScore() >= 60 && employe.getScore() <= 80) {
+                maxLoan = employe.getSalary() * 4;
+            } else if (!employe.isNewClient() && employe.getScore() >= 60 && employe.getScore() <= 80) {
+                maxLoan = employe.getSalary() * 7;
+            } else if (!employe.isNewClient() && employe.getScore() > 80) {
+                maxLoan = employe.getSalary() * 10;
+            }
+
+            credit.setAmountAllowed(maxLoan);
+
+            if (credit.getAmountRequested() > credit.getAmountAllowed()) {
+                System.out.println("You are not eligible for this credit. Maximum allowed: " + credit.getAmountAllowed());
+                return;
             }
 
             if (employe.getScore() >= 80) {
