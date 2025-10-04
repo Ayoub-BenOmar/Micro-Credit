@@ -39,6 +39,23 @@ public class ScoreCalculation {
         return counter1 + counter;
     }
 
+    // capacité financier
+    public int niveauDeRevenu(Employe employe){
+        int counter = 0;
+        if(employe.getSalary() >= 10000){
+            counter = 30;
+        } else if (employe.getSalary() < 10000 && employe.getSalary() >= 8000) {
+            counter = 25;
+        }else if (employe.getSalary() < 8000 && employe.getSalary() >= 5000) {
+            counter = 20;
+        }else if (employe.getSalary() < 5000 && employe.getSalary() >= 3000) {
+            counter = 15;
+        } else{
+            counter = 10;
+        }
+        return counter;
+    }
+
     // critères complémentaires
     public int employePatrimoine(Employe employe){
         int counter;
@@ -89,9 +106,9 @@ public class ScoreCalculation {
         return counter;
     }
 
-
+    // totale score de l'employé
     public int employeTotalScore(Employe employe){
-        return employe.setScore(employeAge(employe) + employeStabilityProf(employe) + employePatrimoine(employe) + employeFamilySituation(employe) + employeKids(employe));
+        return employe.setScore(employeAge(employe) + employeStabilityProf(employe) + employePatrimoine(employe) + employeFamilySituation(employe) + employeKids(employe) + niveauDeRevenu(employe));
     }
 
 }

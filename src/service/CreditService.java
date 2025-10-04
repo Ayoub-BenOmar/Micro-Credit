@@ -3,6 +3,7 @@ package service;
 import enums.DecisionCredit;
 import enums.TypeContrat;
 import model.Credit;
+import model.Echeance;
 import model.Employe;
 import repository.CreditRepository;
 import repository.EmployeRepository;
@@ -11,6 +12,8 @@ import util.ScoreCalculation;
 public class CreditService {
     CreditRepository creditRepository = new CreditRepository();
     EmployeRepository employeRepository = new EmployeRepository();
+    EcheanceService echeanceService = new EcheanceService();
+
     public DecisionCredit decisionCredit(Employe employe){
         ScoreCalculation scoreCalculation = new ScoreCalculation();
         int score = scoreCalculation.employeTotalScore(employe);
@@ -23,50 +26,50 @@ public class CreditService {
         }
     }
 
-    public void createEmployeCredit(Integer employeId, Credit credit){
-        try{
+    public void createEmployeCredit(Integer employeId, Credit credit) {
+        try {
             Employe employe = employeRepository.getEmployeById(employeId);
 
             if (employe == null) {
-                System.out.println("No employee found with id " + employeId);
-                return;
+                throw new IllegalArgumentException("No employee found with id " + employeId);
             }
 
-            try {
-                if (employe.isNewClient()){
-                    if (employe.getScore() >= 60 && employe.getScore() <= 79){
-                        credit.setAmountAllowed(employe.getSalary() * 4);
-                    }
-                }else{
-                    if (employe.getScore() >= 60 && employe.getScore() <= 79){
-                        credit.setAmountAllowed(employe.getSalary() * 7);
-                    } else if (employe.getScore() > 80) {
-                        System.out.println("dkhel");
-                        credit.setAmountAllowed(employe.getSalary() * 10);
-                        System.out.println("khrej");
-                    }
+            if (employe.isNewClient()) {
+                if (employe.getScore() >= 60 && employe.getScore() <= 79) {
+                    credit.setAmountAllowed(employe.getSalary() * 4);
                 }
-            }catch (Exception e){
-                throw new Exception(e.getMessage());
+            } else {
+                if (employe.getScore() >= 60 && employe.getScore() <= 79) {
+                    credit.setAmountAllowed(employe.getSalary() * 7);
+                } else if (employe.getScore() >= 80) {
+                    credit.setAmountAllowed(employe.getSalary() * 10);
+                }
             }
 
-            try {
-                if (employe.getScore() >= 80){
-                    credit.setDecisionCredit(DecisionCredit.ACCORD_IMMEDIAT);
-                } else if (employe.getScore() >= 60 && employe.getScore() <= 79) {
-                    credit.setDecisionCredit(DecisionCredit.ETUDE_MANUELLE);
-                } else {
-                    credit.setDecisionCredit(DecisionCredit.REFUS_AUTOMATIQUE);
-                }
-            }catch (Exception e){
-                throw new Exception(e.getMessage());
+            if (employe.getScore() >= 80) {
+                credit.setDecisionCredit(DecisionCredit.ACCORD_IMMEDIAT);
+            } else if (employe.getScore() >= 60 && employe.getScore() <= 79) {
+                credit.setDecisionCredit(DecisionCredit.ETUDE_MANUELLE);
+            } else {
+                credit.setDecisionCredit(DecisionCredit.REFUS_AUTOMATIQUE);
             }
 
             creditRepository.createEmployeCredit(credit);
-            employe.setNewClient(false);
+
+            if (credit.getId() == null || credit.getId() == 0) {
+                throw new IllegalStateException("Credit ID was not generated after save");
+            }
+
+            if (DecisionCredit.ACCORD_IMMEDIAT.equals(credit.getDecisionCredit())) {
+                echeanceService.createEcheance(credit.getId());
+            }
+
+            employeRepository.updateNewClientStatus(employeId, false);
+
             System.out.println("Credit created for employee id = " + employeId);
-        }catch (Exception e){
-            System.out.println("Service Error: " + e.getMessage());
+
+        } catch (Exception e) {
+            System.err.println("Service credit error: " + e.getMessage());
         }
     }
 }

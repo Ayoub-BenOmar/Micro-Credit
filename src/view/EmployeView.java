@@ -17,20 +17,20 @@ public class EmployeView {
 
     public void createEmploye() {
         Employe emp = new Employe(
-                "Samil",
-                "Baoud",
-                LocalDate.of(2004, 7, 18),
-                "Essaouira",
-                0,
+                "Hassan",
+                "Ettaki",
+                LocalDate.of(1999, 7, 18),
+                "Es-smara",
+                1,
                 true,
-                3000.0,
-                SituationFamiliale.SINGLE,
+                9000.0,
+                SituationFamiliale.MARRIED,
                 0,
-                22000.0,
+                9000.0,
                 9,
                 "Manager",
                 TypeContrat.CDI,
-                Secteur.GRANDE_ENTREPRISE
+                Secteur.PUBLIC
         );
         scoreCalculation.employeTotalScore(emp);
         employeService.createEmploye(emp);

@@ -15,7 +15,8 @@ public class Credit {
     private CreditType creditType;
     private DecisionCredit decisionCredit;
 
-    public Credit(LocalDate dateCredit, double amountRequested, double amountAllowed, double rate, int monthDuration, CreditType creditType, DecisionCredit decisionCredit) {
+    public Credit(int id, LocalDate dateCredit, double amountRequested, double amountAllowed, double rate, int monthDuration, CreditType creditType, DecisionCredit decisionCredit) {
+        this.id = id;
         this.dateCredit = dateCredit;
         this.amountRequested = amountRequested;
         this.amountAllowed = amountAllowed;
@@ -28,7 +29,23 @@ public class Credit {
     public Credit(int personneId, LocalDate dateCredit, double amountRequested, int monthDuration, double rate, CreditType creditType) {
     }
 
-    public int getId() {
+    public Credit() {
+
+    }
+
+    public Credit(int id, int personneId, LocalDate dateCredit, double montantDemande, double montantOctroye, double tauxInteret, int dureeEnMois, CreditType typeCredit, DecisionCredit decision) {
+        this.id = id;
+        this.personneId = personneId;
+        this.dateCredit = dateCredit;
+        this.amountRequested = montantDemande;
+        this.amountAllowed = montantOctroye;
+        this.rate = tauxInteret;
+        this.monthDuration = dureeEnMois;
+        this.creditType = typeCredit;
+        this.decisionCredit = decision;
+    }
+
+    public Integer getId() {
         return id;
     }
 

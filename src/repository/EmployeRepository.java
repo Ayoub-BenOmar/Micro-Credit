@@ -15,7 +15,6 @@ public class EmployeRepository {
     Connection connection = DBConnection.getConnection();
 
     public void create(Employe employe){
-        ScoreCalculation scoreCalculation = new ScoreCalculation();
         String query = "INSERT INTO personne (role, nom, prenom, date_naissance, ville, nombre_enfants, investissement, placement, situation_familiale, score, salaire, anciennete, poste, type_contrat, secteur_entreprise) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, employe.getRole());
@@ -90,7 +89,6 @@ public class EmployeRepository {
         return null;
     }
 
-
     public int delete(Integer id){
         String query = "DELETE FROM personne WHERE id=? AND role=1";
         try(PreparedStatement statement = connection.prepareStatement(query)){
@@ -134,5 +132,17 @@ public class EmployeRepository {
             System.out.println("Repository Error: " + e.getMessage());
         }
         return employes;
+    }
+
+    public boolean updateNewClientStatus(int id, boolean nouveau) {
+        String sql = "UPDATE personne SET nouveau = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setBoolean(1, nouveau);
+            statement.setInt(2, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Repository Error (updateNewClientStatus): " + e.getMessage());
+            return false;
+        }
     }
 }
